@@ -1,0 +1,173 @@
+{
+  "DL": {
+    "name": "Delhi",
+    "departments": {
+      "police": {
+        "pioName": "Public Information Officer",
+        "designation": "Delhi Police Headquarters",
+        "address": "Police Bhawan, Jai Singh Road, Connaught Place, New Delhi - 110001"
+      },
+      "municipality": {
+        "pioName": "Public Information Officer",
+        "designation": "Municipal Corporation of Delhi",
+        "address": "Civic Centre, Minto Road, New Delhi - 110002"
+      },
+      "education": {
+        "pioName": "Public Information Officer",
+        "designation": "Directorate of Education",
+        "address": "Old Secretariat, Civil Lines, Delhi - 110054"
+      },
+      "health": {
+        "pioName": "Public Information Officer",
+        "designation": "Department of Health & Family Welfare",
+        "address": "Delhi Secretariat, IP Estate, New Delhi - 110002"
+      },
+      "transport": {
+        "pioName": "Public Information Officer",
+        "designation": "Transport Department",
+        "address": "5/9 Under Hill Road, Delhi - 110054"
+      },
+      "pwd": {
+        "pioName": "Public Information Officer",
+        "designation": "Public Works Department",
+        "address": "MSO Building, ITO, New Delhi - 110002"
+      },
+      "revenue": {
+        "pioName": "Public Information Officer",
+        "designation": "Revenue Department",
+        "address": "5 Sham Nath Marg, Delhi - 110054"
+      }
+    }
+  },
+  "MH": {
+    "name": "Maharashtra",
+    "departments": {
+      "police": {
+        "pioName": "Public Information Officer",
+        "designation": "Maharashtra Police Headquarters",
+        "address": "Police Head Quarter Building, Fort, Mumbai - 400001"
+      },
+      "municipality": {
+        "pioName": "Public Information Officer",
+        "designation": "Municipal Corporation of Greater Mumbai",
+        "address": "Head Office, Mahapalika Marg, Fort, Mumbai - 400001"
+      },
+      "education": {
+        "pioName": "Public Information Officer",
+        "designation": "School Education Department",
+        "address": "Mantralaya, Madam Cama Road, Mumbai - 400032"
+      },
+      "health": {
+        "pioName": "Public Information Officer",
+        "designation": "Public Health Department",
+        "address": "Mantralaya, Madam Cama Road, Mumbai - 400032"
+      },
+      "transport": {
+        "pioName": "Public Information Officer",
+        "designation": "Transport Commissioner Office",
+        "address": "New Administrative Building, Bandra (East), Mumbai - 400051"
+      },
+      "pwd": {
+        "pioName": "Public Information Officer",
+        "designation": "Public Works Department",
+        "address": "Bandhkam Bhavan, Fort, Mumbai - 400001"
+      },
+      "revenue": {
+        "pioName": "Public Information Officer",
+        "designation": "Revenue Department",
+        "address": "Mantralaya, Madam Cama Road, Mumbai - 400032"
+      }
+    }
+  },
+  "UP": {
+    "name": "Uttar Pradesh",
+    "departments": {
+      "police": {
+        "pioName": "Public Information Officer",
+        "designation": "UP Police Headquarters",
+        "address": "1090, Police Line, Allahabad Road, Lucknow - 226005"
+      },
+      "panchayat": {
+        "pioName": "Public Information Officer",
+        "designation": "Panchayati Raj Department",
+        "address": "Panchayat Bhawan, Vipin Khand, Gomti Nagar, Lucknow - 226010"
+      },
+      "education": {
+        "pioName": "Public Information Officer",
+        "designation": "Basic Education Department",
+        "address": "Vidhan Bhawan, Lucknow - 226001"
+      },
+      "health": {
+        "pioName": "Public Information Officer",
+        "designation": "Department of Health & Family Welfare",
+        "address": "Swasthya Bhawan, Lucknow - 226001"
+      },
+      "agriculture": {
+        "pioName": "Public Information Officer",
+        "designation": "Agriculture Department",
+        "address": "Krishi Bhawan, Madan Mohan Malviya Marg, Lucknow - 226001"
+      },
+      "pwd": {
+        "pioName": "Public Information Officer",
+        "designation": "Public Works Department",
+        "address": "Nirman Bhawan, Tilak Marg, Lucknow - 226001"
+      },
+      "revenue": {
+        "pioName": "Public Information Officer",
+        "designation": "Revenue Department",
+        "address": "Sachivalaya, Lucknow - 226001"
+      }
+    }
+  },
+  "BR": {
+    "name": "Bihar",
+    "departments": {
+      "police": {
+        "pioName": "Public Information Officer",
+        "designation": "Bihar Police Headquarters",
+        "address": "Police Headquarters, Bailey Road, Patna - 800001"
+      },
+      "panchayat": {
+        "pioName": "Public Information Officer",
+        "designation": "Panchayati Raj Department",
+        "address": "Vikas Bhawan, Bailey Road, Patna - 800015"
+      },
+      "education": {
+        "pioName": "Public Information Officer",
+        "designation": "Education Department",
+        "address": "New Secretariat Building, Bailey Road, Patna - 800015"
+      },
+      "health": {
+        "pioName": "Public Information Officer",
+        "designation": "Health Department",
+        "address": "Vikas Bhawan, Bailey Road, Patna - 800015"
+      },
+      "agriculture": {
+        "pioName": "Public Information Officer",
+        "designation": "Agriculture Department",
+        "address": "Vikas Bhawan, Bailey Road, Patna - 800015"
+      },
+      "pwd": {
+        "pioName": "Public Information Officer",
+        "designation": "Building Construction Department",
+        "address": "Vikas Bhawan, Bailey Road, Patna - 800015"
+      },
+      "revenue": {
+        "pioName": "Public Information Officer",
+        "designation": "Revenue & Land Reforms Department",
+        "address": "Old Secretariat, Bailey Road, Patna - 800015"
+      }
+    }
+  },
+  "default": {
+    "name": "Generic",
+    "departments": {
+      "default": {
+        "pioName": "Public Information Officer",
+        "designation": "[Department Name]",
+        "address": "[Department Address]",
+        "note": "Please find and fill the correct PIO details for your specific department"
+      }
+    }
+  }
+} 

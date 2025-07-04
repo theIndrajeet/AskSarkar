@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cream text-text-primary;
+    font-family: 'Georgia', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-red-primary text-cream px-6 py-3 font-medium tracking-wider uppercase transition-all hover:bg-opacity-90;
+  }
+  
+  .search-input {
+    @apply w-full px-4 py-3 bg-transparent border border-border-light focus:border-text-secondary outline-none placeholder:text-text-secondary/50;
+  }
+  
+  .nav-link {
+    @apply text-sm tracking-wider uppercase hover:text-red-primary transition-colors;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4C5B9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C4B5A9;
+}
