@@ -49,7 +49,21 @@ The app can be deployed to any static hosting service like Netlify, Vercel, or G
    - Build command: `npm run build`
    - Publish directory: `dist`
    - Base directory: `ask-sarkar`
-4. Add environment variable: `VITE_GEMINI_API_KEY`
+4. **IMPORTANT: Add environment variable in Netlify**:
+   - Go to Site settings > Environment variables
+   - Add variable: `VITE_GEMINI_API_KEY`
+   - Value: `AIzaSyC8YYkX29-4WyWBKWw-Sm6Cm2dATxgvpeA` (or your own API key)
+   - Deploy scope: Production
+   - Click "Save" and redeploy your site
+
+**Note**: Without the API key, the app will work in mock mode with pre-defined responses.
+
+### Getting Your Own Gemini API Key
+
+1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Sign in with your Google account
+3. Click "Create API Key"
+4. Copy the key and use it in your deployment
 
 ## Contributing
 

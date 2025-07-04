@@ -1,8 +1,8 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Initialize Gemini - You'll need to add your API key
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyC8YYkX29-4WyWBKWw-Sm6Cm2dATxgvpeA';
-const USE_MOCK = API_KEY === 'YOUR_API_KEY_HERE' || !API_KEY || API_KEY === ''; // Use mock if no real API key
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
+const USE_MOCK = !API_KEY || API_KEY === ''; // Use mock if no real API key
 
 const genAI = USE_MOCK ? null : new GoogleGenerativeAI(API_KEY);
 
