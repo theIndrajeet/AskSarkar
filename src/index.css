@@ -10,24 +10,93 @@
     font-family: 'Georgia', serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Better mobile text rendering */
+    text-rendering: optimizeLegibility;
+    /* Prevent zoom on iOS form inputs */
+    -webkit-text-size-adjust: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
   }
+
+  /* Better touch targets for mobile */
+  button, input, textarea, select {
+    @apply touch-manipulation;
+  }
+
+  /* Ensure proper viewport behavior */
+  html {
+    @apply scroll-smooth;
+  }
+
+  /* Better focus styles for accessibility */
+  *:focus {
+    @apply outline-none ring-2 ring-red-primary/20;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-red-primary text-cream px-6 py-3 font-medium tracking-wider uppercase transition-all hover:bg-opacity-90;
+    @apply bg-red-primary text-cream px-6 py-3 font-medium tracking-wider uppercase transition-all hover:bg-opacity-90 touch-manipulation;
+    /* Minimum touch target size */
+    min-height: 44px;
+    min-width: 44px;
   }
   
   .search-input {
-    @apply w-full px-4 py-3 bg-transparent border border-border-light focus:border-text-secondary outline-none placeholder:text-text-secondary/50;
+    @apply w-full px-4 py-3 bg-transparent border border-border-light focus:border-text-secondary focus:ring-2 focus:ring-red-primary/20 outline-none placeholder:text-text-secondary/50 touch-manipulation;
+    /* Prevent zoom on iOS */
+    font-size: 16px;
   }
   
   .nav-link {
-    @apply text-sm tracking-wider uppercase hover:text-red-primary transition-colors;
+    @apply text-sm tracking-wider uppercase hover:text-red-primary transition-colors touch-manipulation;
+    /* Better touch targets */
+    min-height: 44px;
+    @apply flex items-center;
+  }
+
+  /* Mobile-friendly form inputs */
+  .form-input {
+    @apply w-full px-3 py-2.5 border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-red-primary/20 focus:border-red-primary transition-all touch-manipulation;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  /* Mobile-friendly buttons */
+  .btn-mobile {
+    @apply px-4 py-2.5 rounded-lg font-medium transition-all touch-manipulation;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Chat message styling */
+  .chat-message {
+    @apply max-w-[85%] break-words;
+  }
+
+  @media (min-width: 640px) {
+    .chat-message {
+      @apply max-w-[80%];
+    }
+  }
+
+  /* Suggestion buttons */
+  .suggestion-btn {
+    @apply px-3 py-2.5 text-sm bg-white border border-border-light rounded-lg hover:border-red-primary hover:text-red-primary hover:bg-red-primary/5 transition-all duration-200 shadow-sm touch-manipulation;
+    min-height: 44px;
+  }
+
+  /* Progress bar enhancements */
+  .progress-bar {
+    @apply w-full bg-gray-200 rounded-full transition-all duration-300;
+    height: 10px;
+  }
+
+  @media (min-width: 640px) {
+    .progress-bar {
+      height: 12px;
+    }
   }
 }
 
@@ -47,4 +116,107 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #C4B5A9;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 640px) {
+  /* Ensure proper spacing on mobile */
+  .mobile-container {
+    @apply px-4 py-3;
+  }
+
+  /* Better mobile chat experience */
+  .chat-container {
+    @apply h-[400px];
+  }
+
+  /* Sticky header for mobile */
+  .mobile-header {
+    @apply sticky top-0 z-50 bg-white/90 backdrop-blur-sm;
+  }
+
+  /* Improved touch targets */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better text sizes for mobile */
+  .mobile-text {
+    @apply text-sm leading-relaxed;
+  }
+
+  /* Spacing adjustments for mobile */
+  .mobile-spacing {
+    @apply space-y-3;
+  }
+
+  /* Better mobile form layout */
+  .mobile-form {
+    @apply space-y-4;
+  }
+
+  /* Mobile-friendly cards */
+  .mobile-card {
+    @apply rounded-lg shadow-sm;
+  }
+}
+
+/* Tablet and desktop enhancements */
+@media (min-width: 768px) {
+  .chat-container {
+    @apply h-[500px];
+  }
+}
+
+@media (min-width: 1024px) {
+  .chat-container {
+    @apply h-[600px];
+  }
+}
+
+/* Prevent text selection on interactive elements */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Smooth animations for better UX */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Better focus indicators for accessibility */
+.focus-visible:focus {
+  @apply outline-none ring-2 ring-red-primary/40 ring-offset-2;
+}
+
+/* Improved mobile menu */
+.mobile-menu {
+  @apply absolute top-full left-0 right-0 bg-white border-t border-border-light shadow-lg;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -11,8 +11,16 @@ const PDFPreview = ({ formData, onBack, onNewApplication }) => {
   // Get PIO details
   const getPIODetails = () => {
     const stateData = pioDatabase[formData.state] || pioDatabase.default;
-    const deptData = stateData.departments?.[formData.departmentType] || stateData.departments?.default;
-    return deptData;
+    const deptData = stateData.departments?.[formData.departmentType] || 
+                     stateData.departments?.default || 
+                     pioDatabase.default.departments.default;
+    
+    // Ensure we always have valid PIO details
+    return {
+      pioName: deptData?.pioName || 'Public Information Officer',
+      designation: deptData?.designation || `${formData.departmentType} Department`,
+      address: deptData?.address || 'Department Address'
+    };
   };
 
   const formatDate = (dateString) => {
@@ -81,9 +89,9 @@ const PDFPreview = ({ formData, onBack, onNewApplication }) => {
     yPos += 7;
     
     doc.setFont('helvetica', 'normal');
-    yPos = addText(`Name: ${formData.applicantName}`, margin + 5, yPos, pageWidth - 2 * margin - 5);
-    yPos = addText(`Father's/Husband's Name: ${formData.fatherHusbandName}`, margin + 5, yPos, pageWidth - 2 * margin - 5);
-    yPos = addText(`Address: ${formData.address}`, margin + 5, yPos, pageWidth - 2 * margin - 5);
+    yPos = addText(`Name: ${formData.applicantName || 'To be filled'}`, margin + 5, yPos, pageWidth - 2 * margin - 5);
+    yPos = addText(`Father's/Husband's Name: ${formData.fatherHusbandName || 'To be filled'}`, margin + 5, yPos, pageWidth - 2 * margin - 5);
+    yPos = addText(`Address: ${formData.address || 'To be filled'}`, margin + 5, yPos, pageWidth - 2 * margin - 5);
     if (formData.identityParticulars) {
       yPos = addText(`Identity Particulars: ${formData.identityParticulars}`, margin + 5, yPos, pageWidth - 2 * margin - 5);
     }
@@ -95,7 +103,7 @@ const PDFPreview = ({ formData, onBack, onNewApplication }) => {
     yPos += 7;
     
     doc.setFont('helvetica', 'normal');
-    yPos = addText(`Subject Matter: ${formData.subjectMatter}`, margin + 5, yPos, pageWidth - 2 * margin - 5);
+    yPos = addText(`Subject Matter: ${formData.subjectMatter || 'Information request as per RTI Act 2005'}`, margin + 5, yPos, pageWidth - 2 * margin - 5);
     
     if (formData.fromDate && formData.toDate) {
       yPos = addText(`Period: From ${formatDate(formData.fromDate)} to ${formatDate(formData.toDate)}`, margin + 5, yPos, pageWidth - 2 * margin - 5);
@@ -104,7 +112,7 @@ const PDFPreview = ({ formData, onBack, onNewApplication }) => {
     yPos += 5;
     doc.text('Specific details of information required:', margin + 5, yPos);
     yPos += 7;
-    yPos = addText(formData.query, margin + 5, yPos, pageWidth - 2 * margin - 10);
+    yPos = addText(formData.query || 'Information details to be filled', margin + 5, yPos, pageWidth - 2 * margin - 10);
     yPos += 10;
 
     // Delivery Method
@@ -154,10 +162,10 @@ const PDFPreview = ({ formData, onBack, onNewApplication }) => {
     doc.text('Yours sincerely,', pageWidth - margin - 50, yPos);
     yPos += 20;
 
-    doc.text(`(${formData.applicantName})`, pageWidth - margin - 50, yPos);
+    doc.text(`(${formData.applicantName || 'Applicant Name'})`, pageWidth - margin - 50, yPos);
     yPos += 7;
     doc.setFontSize(10);
-    yPos = addText(formData.address, pageWidth - margin - 80, yPos, 80, 10);
+    yPos = addText(formData.address || 'Address', pageWidth - margin - 80, yPos, 80, 10);
 
     // Convert to blob and create URL
     const pdfBlob = doc.output('blob');
@@ -179,7 +187,8 @@ const PDFPreview = ({ formData, onBack, onNewApplication }) => {
 
   const handleDownload = () => {
     const doc = generatePDF();
-    doc.save(`RTI_Application_${formData.applicantName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`);
+    const applicantName = formData.applicantName || 'Applicant';
+    doc.save(`RTI_Application_${applicantName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`);
   };
 
   const handlePrint = () => {
@@ -228,11 +237,20 @@ const PDFPreview = ({ formData, onBack, onNewApplication }) => {
 
         {/* PDF Preview */}
         <div className="vintage-card p-0 overflow-hidden">
-          <iframe
-            src={pdfUrl}
-            className="w-full h-[800px]"
-            title="RTI Application Preview"
-          />
+          {pdfUrl ? (
+            <iframe
+              src={pdfUrl}
+              className="w-full h-[800px]"
+              title="RTI Application Preview"
+            />
+          ) : (
+            <div className="w-full h-[800px] flex items-center justify-center bg-gray-50">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-primary mx-auto mb-4"></div>
+                <p className="text-gray-600">Generating PDF preview...</p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Instructions */}

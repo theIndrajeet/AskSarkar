@@ -36,6 +36,11 @@
         "pioName": "Public Information Officer",
         "designation": "Revenue Department",
         "address": "5 Sham Nath Marg, Delhi - 110054"
+      },
+      "electricity": {
+        "pioName": "Public Information Officer",
+        "designation": "Delhi Electricity Regulatory Commission",
+        "address": "Viniyamak Bhawan, C-Block, Shivalik, Malviya Nagar, New Delhi - 110017"
       }
     }
   },
@@ -76,6 +81,11 @@
         "pioName": "Public Information Officer",
         "designation": "Revenue Department",
         "address": "Mantralaya, Madam Cama Road, Mumbai - 400032"
+      },
+      "electricity": {
+        "pioName": "Public Information Officer",
+        "designation": "Maharashtra Electricity Regulatory Commission",
+        "address": "World Trade Centre, 13th Floor, Cuffe Parade, Mumbai - 400005"
       }
     }
   },
@@ -116,6 +126,11 @@
         "pioName": "Public Information Officer",
         "designation": "Revenue Department",
         "address": "Sachivalaya, Lucknow - 226001"
+      },
+      "electricity": {
+        "pioName": "Public Information Officer",
+        "designation": "Uttar Pradesh Electricity Regulatory Commission",
+        "address": "Vidyut Bhawan, Ashok Marg, Lucknow - 226001"
       }
     }
   },
@@ -126,6 +141,11 @@
         "pioName": "Public Information Officer",
         "designation": "Bihar Police Headquarters",
         "address": "Police Headquarters, Bailey Road, Patna - 800001"
+      },
+      "municipality": {
+        "pioName": "Public Information Officer",
+        "designation": "Patna Municipal Corporation",
+        "address": "Town Hall, Fraser Road, Patna - 800001"
       },
       "panchayat": {
         "pioName": "Public Information Officer",
@@ -156,6 +176,11 @@
         "pioName": "Public Information Officer",
         "designation": "Revenue & Land Reforms Department",
         "address": "Old Secretariat, Bailey Road, Patna - 800015"
+      },
+      "electricity": {
+        "pioName": "Public Information Officer",
+        "designation": "Bihar Electricity Regulatory Commission",
+        "address": "Vidyut Bhawan, Jawahar Lal Nehru Marg, Patna - 800001"
       }
     }
   },

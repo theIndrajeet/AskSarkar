@@ -12,8 +12,8 @@ const PersonalDetails = ({ formData, onChange, onNext }) => {
   const isValid = formData.name && formData.fatherHusbandName && formData.address;
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-4">
+    <div className="space-y-6 fade-in">
+      <div className="mobile-form space-y-4 sm:space-y-6">
         <div>
           <label className="block text-sm font-medium mb-2 text-text-secondary">
             {t('name')} <span className="text-red-primary">*</span>
@@ -22,7 +22,7 @@ const PersonalDetails = ({ formData, onChange, onNext }) => {
             type="text"
             value={formData.name || ''}
             onChange={(e) => handleChange('name', e.target.value)}
-            className="w-full px-4 py-2 border border-border-light rounded focus:outline-none focus:border-text-secondary transition-colors"
+            className="form-input"
             placeholder={t('enterYourName') || "Enter your full name"}
           />
         </div>
@@ -35,7 +35,7 @@ const PersonalDetails = ({ formData, onChange, onNext }) => {
             type="text"
             value={formData.fatherHusbandName || ''}
             onChange={(e) => handleChange('fatherHusbandName', e.target.value)}
-            className="w-full px-4 py-2 border border-border-light rounded focus:outline-none focus:border-text-secondary transition-colors"
+            className="form-input"
             placeholder={t('enterFatherHusbandName') || "Enter father's/husband's name"}
           />
         </div>
@@ -48,20 +48,20 @@ const PersonalDetails = ({ formData, onChange, onNext }) => {
             value={formData.address || ''}
             onChange={(e) => handleChange('address', e.target.value)}
             rows={4}
-            className="w-full px-4 py-2 border border-border-light rounded focus:outline-none focus:border-text-secondary transition-colors resize-none"
+            className="form-input resize-none"
             placeholder={t('enterYourAddress') || "Enter your complete address"}
           />
         </div>
       </div>
 
-      <div className="flex justify-between pt-6 border-t border-border-light">
-        <div className="text-sm text-text-secondary">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-6 border-t border-border-light space-y-4 sm:space-y-0">
+        <div className="text-sm text-text-secondary text-center sm:text-left">
           Step 1 of 6
         </div>
         <button
           onClick={onNext}
           disabled={!isValid}
-          className="btn-primary flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
         >
           {t('next') || 'Next'}
           <ChevronRight size={18} />

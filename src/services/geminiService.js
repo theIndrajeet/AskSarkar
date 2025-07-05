@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import rateLimiter from '../utils/rateLimiter';
 
 // Initialize Gemini - You'll need to add your API key
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
@@ -117,6 +118,12 @@ export const generateRTIQuery = async (message, conversationHistory = [], langua
 
 export const geminiService = {
   async processUserMessage(message, conversationHistory = []) {
+    // Check rate limit first
+    if (!USE_MOCK && !rateLimiter.canMakeRequest()) {
+      const usageMessage = rateLimiter.getUsageMessage();
+      throw new Error(usageMessage.message);
+    }
+
     if (USE_MOCK) {
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -154,6 +161,12 @@ export const geminiService = {
     }
 
     try {
+      // Record the request attempt
+      if (!USE_MOCK && !rateLimiter.recordRequest()) {
+        const usageMessage = rateLimiter.getUsageMessage();
+        throw new Error(usageMessage.message);
+      }
+
       // Build the conversation context
       const fullPrompt = `${RTI_SYSTEM_PROMPT}\n\nConversation history:\n${conversationHistory.map(h => `${h.role}: ${h.message}`).join('\n')}\n\nUser: ${message}\n\nAssistant:`;
 
@@ -183,12 +196,25 @@ export const geminiService = {
       };
     } catch (error) {
       console.error('Gemini API error:', error);
+      
+      // If it's a quota error, provide helpful message
+      if (error.message && error.message.includes('429')) {
+        const usageMessage = rateLimiter.getUsageMessage();
+        throw new Error(usageMessage ? usageMessage.message : 'API quota exceeded. Please try again later or use the manual form.');
+      }
+      
       throw error;
     }
   },
 
   // Generate RTI query from natural language
   async generateRTIQuery(userInput, department, state) {
+    // Check rate limit
+    if (!USE_MOCK && !rateLimiter.canMakeRequest()) {
+      const usageMessage = rateLimiter.getUsageMessage();
+      throw new Error(usageMessage.message);
+    }
+
     const prompt = `Convert this complaint/request into a formal RTI query for ${department} department in ${state}:
 
 User's complaint: "${userInput}"
@@ -202,17 +228,35 @@ Generate a formal, legally sound RTI query that:
 Return only the RTI query text, nothing else.`;
 
     try {
+      // Record the request
+      if (!USE_MOCK && !rateLimiter.recordRequest()) {
+        const usageMessage = rateLimiter.getUsageMessage();
+        throw new Error(usageMessage.message);
+      }
+
       const result = await model.generateContent(prompt);
       const response = await result.response;
       return response.text().trim();
     } catch (error) {
       console.error('Gemini API error:', error);
+      
+      if (error.message && error.message.includes('429')) {
+        const usageMessage = rateLimiter.getUsageMessage();
+        throw new Error(usageMessage ? usageMessage.message : 'API quota exceeded. Please try again later or use the manual form.');
+      }
+      
       throw error;
     }
   },
 
   // Get department suggestions based on complaint
   async suggestDepartment(complaint) {
+    // Check rate limit
+    if (!USE_MOCK && !rateLimiter.canMakeRequest()) {
+      // For department suggestions, fail silently and return default
+      return 'municipality';
+    }
+
     const prompt = `Based on this complaint, which government department should handle this RTI:
 "${complaint}"
 
@@ -221,6 +265,11 @@ Choose from: police, municipality, panchayat, pwd, health, education, revenue, t
 Return only the department key.`;
 
     try {
+      // Record the request
+      if (!USE_MOCK && !rateLimiter.recordRequest()) {
+        return 'municipality';
+      }
+
       const result = await model.generateContent(prompt);
       const response = await result.response;
       return response.text().trim().toLowerCase();
@@ -228,6 +277,16 @@ Return only the department key.`;
       console.error('Gemini API error:', error);
       return 'municipality'; // default fallback
     }
+  },
+
+  // Get current usage information
+  getUsageInfo() {
+    return rateLimiter.getUsageInfo();
+  },
+
+  // Get usage message if any
+  getUsageMessage() {
+    return rateLimiter.getUsageMessage();
   }
 };
 
